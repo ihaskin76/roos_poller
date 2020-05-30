@@ -46,7 +46,7 @@ if __name__ == "__main__":
         result = sent_cmd_to_ros(bras, username, password, cmd)
         for i in result:
             query = "INSERT INTO `PPPoE_USERS` (`login`, `uptime`, `ip_addr`, `callerID`, `brasID`) VALUES ('{}','{}','{}','{}','{}') ON DUPLICATE KEY UPDATE `login` = VALUES(login), `uptime` = VALUES(uptime), `ip_addr` = VALUES(ip_addr), `callerID` = VALUES(callerID), `brasID` = VALUES(brasID)".format(i['name'],i['uptime'],i['address'],i['caller-id'], brasID['id'])
-            logging.info(query)
+            #logging.info(query)
             cursor.execute(query)
             
         connection.commit()
