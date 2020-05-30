@@ -39,9 +39,13 @@ def sent_cmd_to_ros(ip, username, password, cmd):
 
 if __name__ == "__main__":
     for bras in ips:
+        query = "SELECT id FROM `BRAS` WHERE `ip` = '{}'".format(bras)
+        cursor.execute(query)
+        brasID = cursor.fetchone()
+        
         result = sent_cmd_to_ros(bras, username, password, cmd)
         for i in result:
-            query = "INSERT INTO `PPPoE_USERS` (`login`, `uptime`, `ip_addr`, `callerID`, `brasID`) VALUES ('{}','{}','{}','{}','3') ON DUPLICATE KEY UPDATE `login` = VALUES(login), `uptime` = VALUES(uptime), `ip_addr` = VALUES(ip_addr), `callerID` = VALUES(callerID), `brasID` = VALUES(brasID)".format(i['name'],i['uptime'],i['address'],i['caller-id'])
+            query = "INSERT INTO `PPPoE_USERS` (`login`, `uptime`, `ip_addr`, `callerID`, `brasID`) VALUES ('{}','{}','{}','{}','{}') ON DUPLICATE KEY UPDATE `login` = VALUES(login), `uptime` = VALUES(uptime), `ip_addr` = VALUES(ip_addr), `callerID` = VALUES(callerID), `brasID` = VALUES(brasID)".format(i['name'],i['uptime'],i['address'],i['caller-id'], brasID['id'])
             logging.info(query)
             cursor.execute(query)
             
