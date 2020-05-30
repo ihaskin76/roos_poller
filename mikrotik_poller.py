@@ -3,10 +3,16 @@ import logging,os
 import pymysql
 from pymysql.cursors import DictCursor
 
-ips = os.environ.get('ips')
+ips_str = os.environ.get('ips')
 username = os.environ.get('username')
 password = os.environ.get('password')
 cmd = os.environ.get('cmd')
+
+def split_line(text):
+    words = text.split(',')
+    return words
+ips = split_line(ips_str)
+
 
 db_host = os.environ.get('db_host')
 db_user = os.environ.get('db_user')
