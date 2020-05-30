@@ -5,7 +5,7 @@ from pymysql.cursors import DictCursor
 
 ips = os.environ.get('ips')
 username = os.environ.get('username')
-password = os.environ.get('password')'
+password = os.environ.get('password')
 cmd = os.environ.get('cmd')
 
 db_host = os.environ.get('db_host')
