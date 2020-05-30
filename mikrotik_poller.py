@@ -3,15 +3,15 @@ import logging,os
 import pymysql
 from pymysql.cursors import DictCursor
 
-ips = os.getev('ips')
-username = os.getev('username')
-password = os.getev('password')'
-cmd = os.getev('cmd')
+ips = os.environ.get('ips')
+username = os.environ.get('username')
+password = os.environ.get('password')'
+cmd = os.environ.get('cmd')
 
-db_host = os.getev('db_host')
-db_user = os.getev('db_user')
-db_password = os.getev('db_password')
-db_dbname = os.getev('db_dbname')
+db_host = os.environ.get('db_host')
+db_user = os.environ.get('db_user')
+db_password = os.environ.get('db_password')
+db_dbname = os.environ.get('db_dbname')
 
 connection = pymysql.connect(host=db_host, user=db_user, password=db_password, db=db_dbname, cursorclass=DictCursor)
 
