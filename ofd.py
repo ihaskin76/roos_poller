@@ -1,6 +1,6 @@
 # -*- coding: cp1251 -*-
 import requests
-import re
+import re, os
 from pprint import pprint
 import logging
 import pymysql
