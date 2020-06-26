@@ -18,7 +18,7 @@ db_dbname = os.environ.get('db_dbname')
 
 your_phone = os.environ.get('your_phone')
 pwd = os.environ.get('pwd')
-
+print(pwd)
 qr_string=os.environ.get('qr_string')
 
 connection = pymysql.connect(host=db_host, user=db_user, password=db_password, db=db_dbname, cursorclass=DictCursor)
