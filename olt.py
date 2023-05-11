@@ -9,7 +9,7 @@ from netaddr import *
 
 total_proc = 0
 total_new = 0
-olts = list(os.environ.get('olts'))
+olts = os.environ.get('olts')
 db_host = os.environ.get('db_host')
 db_user = os.environ.get('db_user')
 db_password = os.environ.get('db_password') 
