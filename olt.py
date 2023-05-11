@@ -4,7 +4,7 @@ import json
 import mysql.connector
 from netmiko import ConnectHandler
 import ipaddress
-import socket, struct
+import socket, struct, os
 from netaddr import *
 
 total_proc = 0
