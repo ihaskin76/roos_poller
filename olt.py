@@ -55,7 +55,7 @@ for olt in olts:
     net_connect.disconnect()
     parsed_mac_address_parser = mac_address_parser(data_to_parse)
     for mac_addr in parsed_mac_address_parser[0]:
-        if (mac_addr["vlan_id"] != '1') and (mac_addr["vlan_id"] != '----')and (mac_addr["vlan_id"] != '150') and (not 'g' in mac_addr["ports"]):
+        if (mac_addr["vlan_id"] != '1') and (mac_addr["vlan_id"] != '----') and (mac_addr["vlan_id"] != '150') and (not 'g' in mac_addr["ports"])  and (not '400' in mac_addr["vlan_id"]):
             class mac_custom(mac_unix): pass                    # формируем мак
             mac_custom.word_fmt = '%.2X'                        # формируем мак
             mac = EUI(mac_addr['mac_addr'], dialect=mac_custom) # формируем мак
