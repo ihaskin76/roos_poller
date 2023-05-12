@@ -65,13 +65,14 @@ for olt in olts:
             sql_check_result = mycursor.fetchall()
             
             try:
-                vendor = MacLookup().lookup(mac)
-            except:
+                vendor = MacLookup().lookup(f'{mac}')
+            except Exception as err:
+                print(err)
                 vendor = '---'
-                
+            vendor = vendor.replace("'", "*")    
             if len(sql_check_result) == 1:
                 proc += 1
-                sql = f"UPDATE `onu` SET `olt` = '{olt}', `olt_port` = '{mac_addr['ports']}', `user_vlan` = '{mac_addr['vlan_id']}' WHERE `client_mac` = '{mac}';"
+                sql = f"UPDATE `onu` SET `olt` = '{olt}', `olt_port` = '{mac_addr['ports']}', `vendor` = '{vendor}', `user_vlan` = '{mac_addr['vlan_id']}' WHERE `client_mac` = '{mac}';"
             elif len(sql_check_result) == 0:
                 sql = f"INSERT INTO `onu` (`client_mac`, `vendor`, `olt`, `olt_port`, `user_vlan`) VALUES ('{mac}', '{vendor}', '{olt}', '{mac_addr['ports']}', '{mac_addr['vlan_id']}');"
                 proc += 1
