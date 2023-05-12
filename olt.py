@@ -6,6 +6,7 @@ from netmiko import ConnectHandler
 import ipaddress
 import socket, struct, os
 from netaddr import *
+from mac_vendor_lookup import MacLookup
 
 total_proc = 0
 total_new = 0
@@ -63,11 +64,16 @@ for olt in olts:
             mycursor.execute(sql_check)
             sql_check_result = mycursor.fetchall()
             
+            try:
+                vendor = MacLookup().lookup(mac)
+            except:
+                vendor = '---'
+                
             if len(sql_check_result) == 1:
                 proc += 1
                 sql = f"UPDATE `onu` SET `olt` = '{olt}', `olt_port` = '{mac_addr['ports']}', `user_vlan` = '{mac_addr['vlan_id']}' WHERE `client_mac` = '{mac}';"
             elif len(sql_check_result) == 0:
-                sql = f"INSERT INTO `onu` (`client_mac`, `olt`, `olt_port`, `user_vlan`) VALUES ('{mac}', '{olt}', '{mac_addr['ports']}', '{mac_addr['vlan_id']}');"
+                sql = f"INSERT INTO `onu` (`client_mac`, `vendor`, `olt`, `olt_port`, `user_vlan`) VALUES ('{mac}', '{vendor}', '{olt}', '{mac_addr['ports']}', '{mac_addr['vlan_id']}');"
                 proc += 1
                 new  += 1
             res = mycursor.execute(sql)
