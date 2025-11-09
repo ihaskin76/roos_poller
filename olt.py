@@ -10,7 +10,7 @@ from mac_vendor_lookup import MacLookup
 
 total_proc = 0
 total_new = 0
-olts = ['10.250.0.9', '10.250.0.7', '10.250.0.6', '10.250.0.3', '10.250.0.10']
+olts = ['10.250.0.9', '10.250.0.7', '10.250.0.6', '10.250.0.3', '10.250.0.10', '10.250.0.4']
 db_host = os.environ.get('db_host')
 db_user = os.environ.get('db_user')
 db_password = os.environ.get('db_password') 
@@ -87,3 +87,4 @@ print(f'TOTAL NEW: {total_new}, TOTAL PROC: {total_proc}')
 
 mycursor.close()
 mydb.close()            
+
