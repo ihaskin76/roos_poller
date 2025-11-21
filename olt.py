@@ -72,7 +72,8 @@ for olt in olts:
             vendor = vendor.replace("'", "*")    
             if len(sql_check_result) == 1:
                 proc += 1
-                sql = f"UPDATE `onu` SET `olt` = '{olt}', `olt_port` = '{mac_addr['ports']}', `vendor` = '{vendor}', `user_vlan` = '{mac_addr['vlan_id']}' WHERE `client_mac` = '{mac}';"
+                #sql = f"UPDATE `onu` SET `olt` = '{olt}', `olt_port` = '{mac_addr['ports']}', `vendor` = '{vendor}', `user_vlan` = '{mac_addr['vlan_id']}' WHERE `client_mac` = '{mac}';"
+                sql = f"UPDATE `onu` SET `olt` = '{olt}', `olt_port` = '{mac_addr['ports']}', `vendor` = '{vendor}', `user_vlan` = '{mac_addr['vlan_id']}', `last_update` = NOW() WHERE `client_mac` = '{mac}';"
             elif len(sql_check_result) == 0:
                 sql = f"INSERT INTO `onu` (`client_mac`, `vendor`, `olt`, `olt_port`, `user_vlan`) VALUES ('{mac}', '{vendor}', '{olt}', '{mac_addr['ports']}', '{mac_addr['vlan_id']}');"
                 proc += 1
@@ -87,4 +88,5 @@ print(f'TOTAL NEW: {total_new}, TOTAL PROC: {total_proc}')
 
 mycursor.close()
 mydb.close()            
+
 
